@@ -1,0 +1,17 @@
+{
+  "name": "my-blockchain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jean C. Contreras",
+  "license": "MIT",
+  "scripts": {
+    "start": "babel-node index.js",
+    "dev": "nodemon --exec yarn start"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.14.9",
+    "nodemon": "^2.0.12"
+  }
+}
