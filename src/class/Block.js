@@ -11,6 +11,14 @@ class Block {
     return new this(timestamp, undefined, 'g3n3s1s_h4sh', 'I Like Ramen.');
   }
 
+  static mine(previousBlock, data) {
+    const timestamp = Date.now();
+    const hash = '@TODO-h4sh';
+    const { hash: previousHash } = previousBlock;
+
+    return new this(timestamp, previousHash, hash, data);
+  }
+
   toString() {
     const { timestamp, previousHash, hash, data } = this;
 
