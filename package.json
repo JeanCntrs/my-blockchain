@@ -13,5 +13,8 @@
     "@babel/node": "^7.14.9",
     "@babel/preset-env": "^7.14.9",
     "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
   }
 }
