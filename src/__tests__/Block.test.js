@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals';
-import Block from './Block';
+import Block from '../classes/Block';
 
 describe('Block', () => {
     let timestamp, previousBlock, hash, data;
