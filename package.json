@@ -5,7 +5,7 @@
   "author": "Jean C. Contreras",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node index.js",
+    "start": "babel-node ./src/service/index.js",
     "dev": "nodemon --exec yarn start",
     "test": "jest",
     "test:watch": "jest --watchAll"
@@ -18,7 +18,9 @@
     "nodemon": "^2.0.12"
   },
   "dependencies": {
-    "crypto-js": "^4.1.1"
+    "body-parser": "^1.19.0",
+    "crypto-js": "^4.1.1",
+    "express": "^4.17.1"
   },
   "jest": {
     "silent": true,
