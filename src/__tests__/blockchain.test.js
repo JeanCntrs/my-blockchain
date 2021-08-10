@@ -4,9 +4,11 @@ import Blockchain from '../classes/Blockchain';
 
 describe('Blockchain', () => {
     let blockchain;
+    let blockchainB;
 
     beforeEach(() => {
         blockchain = new Blockchain();
+        blockchainB = new Blockchain();
     });
 
     it('Every blockchain has a genesis block', () => {
@@ -24,5 +26,29 @@ describe('Blockchain', () => {
 
         expect(lastBlock.data).toEqual(data);
         expect(blockchain.blocks.length).toEqual(2);
+    });
+
+    it('Replaces the chain with a valid chain', () => {
+        blockchainB.addBlock('bl0ck-1');
+        blockchain.replace(blockchainB.blocks);
+
+        expect(blockchain.blocks).toEqual(blockchainB.blocks);
+    });
+
+    it('Does not replace the chain with one with less blocks', () => {
+        blockchain.addBlock('bl0ck-1');
+
+        expect(() => {
+            blockchain.replace(blockchainB.blocks);
+        }).toThrowError('Received chain is not longer than current chain');
+    });
+
+    it('Not replace the chain with one is not valid', () => {
+        blockchainB.addBlock('bl0ck-1');
+        blockchainB.blocks[1].data = 'bl0ck-h4ck3d';
+
+        expect(() => {
+            blockchain.replace(blockchainB.blocks);
+        }).toThrowError('Received chain is invalid');
     });
 });
