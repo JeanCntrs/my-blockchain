@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "babel-node ./src/service/index.js",
+    "start:2": "HTTP_PORT=3001 P2P_PORT=5001 PEERS=ws:localhost:5000 babel-node ./src/service/index.js",
     "dev": "nodemon --exec yarn start",
     "test": "jest",
     "test:watch": "jest --watchAll"
