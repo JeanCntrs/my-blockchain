@@ -47,4 +47,5 @@ class Block {
   }
 }
 
+export { DIFFICULTY };
 export default Block;
