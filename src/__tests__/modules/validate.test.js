@@ -1,6 +1,6 @@
 import { expect } from '@jest/globals';
-import Blockchain from '../classes/Blockchain';
-import validate from '../modules/validate';
+import Blockchain from '../../classes/Blockchain';
+import validate from '../../modules/validate';
 
 describe('validate()', () => {
     let blockchain;
