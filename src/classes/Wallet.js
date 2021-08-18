@@ -7,7 +7,7 @@ class Wallet {
     constructor() {
         this.balance = INITIAL_BALANCE;
         this.keyPair = ec.genKeyPair();
-        this.publicKey = this.keyPair.genPublic().encode('hex');
+        this.publicKey = this.keyPair.getPublic().encode('hex');
     }
 
     toString() {
@@ -19,4 +19,5 @@ class Wallet {
     }
 }
 
+export { INITIAL_BALANCE };
 export default Wallet;
