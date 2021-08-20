@@ -1,8 +1,8 @@
-import uuidV1 from 'uuid/v1';
+import {v4 as uuidv4} from 'uuid';
 
 class Transaction {
     constructor() {
-        this.id = uuidV1();
+        this.id = uuidv4();
         this.input = null;
         this.outputs = [];
     }
