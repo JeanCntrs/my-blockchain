@@ -1,4 +1,5 @@
 import Elliptic from 'elliptic';
+import genHash from '../modules/genHash';
 
 const ec = new Elliptic.ec('secp256k1');
 const INITIAL_BALANCE = 100;
@@ -16,6 +17,10 @@ class Wallet {
         return `Wallet - 
         publicKey:  ${publicKey.toString()}
         balance:    ${balance}`;
+    }
+
+    sign(data) {
+        return this.keyPair.sign(genHash(data));
     }
 }
 
