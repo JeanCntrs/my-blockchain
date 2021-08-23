@@ -1,4 +1,5 @@
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import elliptic from '../modules/elliptic';
 
 class Transaction {
     constructor() {
@@ -27,6 +28,12 @@ class Transaction {
         };
 
         return transaction;
+    }
+
+    static verify(transaction) {
+        const { input: { address, signature }, outputs } = transaction;
+
+        return elliptic.verifySignature(address, signature, outputs);
     }
 }
 
