@@ -10,3 +10,5 @@ class MemoryPool {
         else this.transactions.push(transaction);
     }
 }
+
+export default MemoryPool;
