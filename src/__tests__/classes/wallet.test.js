@@ -1,11 +1,14 @@
 import { expect } from '@jest/globals';
 import Wallet, { INITIAL_BALANCE } from '../../classes/Wallet';
+import Blockchain from '../../classes/Blockchain';
 
 describe('Wallet', () => {
+    let blockchain
     let wallet;
 
     beforeEach(() => {
-        wallet = new Wallet();
+        blockchain = new Blockchain();
+        wallet = new Wallet(blockchain);
     });
 
     it('It is a healthy wallet', () => {
