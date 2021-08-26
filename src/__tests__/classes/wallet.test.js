@@ -20,8 +20,34 @@ describe('Wallet', () => {
 
     it('Use sign()', () => {
         const signature = wallet.sign('h3ll0');
-        
+
         expect(typeof signature).toEqual('object');
         expect(signature).toEqual(wallet.sign('h3ll0'));
+    });
+
+    describe('Creating a transaction', () => {
+        let txn, recipientAddress, amount;
+
+        beforeEach(() => {
+            recipientAddress = 'r4nd0m-4ddr355';
+            amount = 5;
+            txn = wallet.createTransaction(recipientAddress, amount);
+        });
+
+        describe('And doing the same transaction', () => {
+            beforeEach(() => {
+                txn = wallet.createTransaction(recipientAddress, amount);
+            });
+
+            it('Double the amount substracted from the wallet balance', () => {
+                const output = txn.outputs.find(({ address }) => address === wallet.publicKey);
+                expect(output.amount).toEqual(wallet.balance - (amount * 2));
+            });
+
+            it('Clones the amount output for the recipient', () => {
+                const amounts = txn.outputs.filter(({ address }) => address === recipientAddress).map(output => output.amount);
+                expect(amounts).toEqual([amount, amount]);
+            });
+        });
     });
 });
