@@ -23,6 +23,12 @@ app.post('/mine', (req, res) => {
     res.json({ blocks: blockchain.blocks.length, block });
 });
 
+app.get('/transactions', (req, res) => {
+    const { memoryPool: { transactions } } = blockchain;
+
+    res.json(transactions);
+});
+
 app.listen(HTTP_PORT, () => {
     console.log(`Service http:${HTTP_PORT} listening...`);
     p2pService.listen();
