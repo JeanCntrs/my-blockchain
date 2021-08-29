@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Blockchain from '../classes/Blockchain';
 import Wallet from '../classes/Wallet';
-import P2PService from './p2p';
+import P2PService, { MESSAGE } from './p2p';
 
 const { HTTP_PORT = 3000 } = process.env;
 const app = express();
@@ -33,11 +33,11 @@ app.get('/transactions', (req, res) => {
 
 app.post('/transaction', (req, res) => {
     const { body: { recipient, amount } } = req;
-    console.log('recipient', recipient);
-    console.log('amount', amount);
+
     try {
         const txn = wallet.createTransaction(recipient, amount);
 
+        p2pService.broadcast(MESSAGE.TXN, txn);
         res.json(txn);
     } catch (error) {
         console.log('error', error);
