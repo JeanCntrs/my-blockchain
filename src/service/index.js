@@ -32,4 +32,4 @@ app.get('/transactions', (req, res) => {
 app.listen(HTTP_PORT, () => {
     console.log(`Service http:${HTTP_PORT} listening...`);
     p2pService.listen();
-});
+ });
