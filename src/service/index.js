@@ -1,11 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import Blockchain from '../classes/Blockchain';
+import Wallet from '../classes/Wallet';
 import P2PService from './p2p';
 
 const { HTTP_PORT = 3000 } = process.env;
 const app = express();
 const blockchain = new Blockchain();
+const wallet = new Wallet(blockchain);
 const p2pService = new P2PService(blockchain);
 
 app.use(bodyParser.json());
@@ -29,7 +31,21 @@ app.get('/transactions', (req, res) => {
     res.json(transactions);
 });
 
+app.post('/transaction', (req, res) => {
+    const { body: { recipient, amount } } = req;
+    console.log('recipient', recipient);
+    console.log('amount', amount);
+    try {
+        const txn = wallet.createTransaction(recipient, amount);
+
+        res.json(txn);
+    } catch (error) {
+        console.log('error', error);
+        res.json({ error: error.message });
+    }
+});
+
 app.listen(HTTP_PORT, () => {
     console.log(`Service http:${HTTP_PORT} listening...`);
     p2pService.listen();
- });
+});
