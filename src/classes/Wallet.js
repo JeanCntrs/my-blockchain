@@ -5,8 +5,8 @@ import genHash from '../modules/genHash';
 const INITIAL_BALANCE = 100;
 
 class Wallet {
-    constructor(blockchain) {
-        this.balance = INITIAL_BALANCE;
+    constructor(blockchain, initialBalance = INITIAL_BALANCE) {
+        this.balance = initialBalance;
         this.keyPair = elliptic.createKeyPair();
         this.publicKey = this.keyPair.getPublic().encode('hex');
         this.blockchain = blockchain;
