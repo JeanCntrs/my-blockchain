@@ -1,5 +1,6 @@
 import Transaction from "./Transaction";
 import Wallet from "./Wallet";
+import { MESSAGE } from '../service/p2p';
 
 const blockchainWallet = new Wallet();
 
@@ -21,6 +22,7 @@ class Miner {
 
         p2pservice.sync();
         memoryPool.wipe();
+        p2pservice.broadcast(MESSAGE.WIPE);
 
         return block
     }
