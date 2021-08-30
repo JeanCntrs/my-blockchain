@@ -1,6 +1,8 @@
 import { expect } from '@jest/globals';
-import Transaction from '../../classes/Transaction';
+import Transaction, { REWARD } from '../../classes/Transaction';
 import Wallet from '../../classes/Wallet';
+
+const blockchainWallet = new Wallet();
 
 describe('Transaction', () => {
     let wallet, transaction, amount, recipientAddress;
@@ -76,6 +78,22 @@ describe('Transaction', () => {
         it('Outputs an amount for the next recipient', () => {
             const output = transaction.outputs.find(({ address }) => address === nextRecipient);
             expect(output.amount).toEqual(nextAmount);
+        });
+    });
+
+    describe('Creating a reward transaction', () => {
+        beforeEach(() => {
+            transaction = Transaction.reward(wallet, blockchainWallet);
+        });
+
+        it('Reward the miners wallet', () => {
+            expect(transaction.outputs.length).toEqual(2);
+
+            let output = transaction.outputs.find(({ address }) => address === wallet.publicKey);
+            expect(output.amount).toEqual(REWARD);
+
+            output = transaction.outputs.find(({ address }) => address === blockchainWallet.publicKey);
+            expect(output.amount).toEqual(blockchainWallet.balance - REWARD);
         });
     });
 });
