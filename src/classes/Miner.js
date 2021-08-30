@@ -20,6 +20,7 @@ class Miner {
         const block = this.blockchain.addBlock(memoryPool.transactions);
 
         p2pservice.sync();
+        memoryPool.wipe();
 
         return block
     }

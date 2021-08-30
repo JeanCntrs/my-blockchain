@@ -35,4 +35,9 @@ describe('MemoryPool', () => {
         expect(JSON.stringify(found)).not.toEqual(txnOld);
         expect(txnNew).toEqual(found);
     });
+
+    it('Wipes transactions', () => {
+        memoryPool.wipe();
+        expect(memoryPool.transactions.length).toEqual(0);
+    });
 });
