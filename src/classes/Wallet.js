@@ -20,7 +20,7 @@ class Wallet {
         balance:    ${balance}`;
     }
 
-    sign(data) {
+    sign(data) { 
         return this.keyPair.sign(genHash(data));
     }
 
