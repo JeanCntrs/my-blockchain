@@ -48,7 +48,7 @@ class Wallet {
         const txns = [];
 
         blocks.forEach(({ data = [] }) => {
-            if (Array.isArrray(data)) data.forEach((txn) => txns.push(txn));
+            if (Array.isArray(data)) data.forEach((txn) => txns.push(txn));
         });
 
         const walletInputTxns = txns.filter(txn => txn.input.address === publicKey);

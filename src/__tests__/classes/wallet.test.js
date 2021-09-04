@@ -50,4 +50,24 @@ describe('Wallet', () => {
             });
         });
     });
+
+    describe('Calculating a balance', () => {
+        let addBalance, times, senderWallet;
+
+        beforeEach(() => {
+            addBalance = 16,
+                times = 5;
+            senderWallet = new Wallet(blockchain);
+
+            for (let i = 0; i < times; i++) {
+                senderWallet.createTransaction(wallet.publicKey, addBalance);
+            }
+
+            blockchain.addBlock(blockchain.memoryPool.transactions);
+        });
+
+        it('Calculates the balance for blockchain txns matching the recipient', () => {
+            expect(wallet.calculateBalance()).toEqual(INITIAL_BALANCE + (addBalance * times));
+        });
+    });
 });
