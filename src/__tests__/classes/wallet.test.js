@@ -68,6 +68,7 @@ describe('Wallet', () => {
 
         it('Calculates the balance for blockchain txns matching the recipient', () => {
             expect(wallet.calculateBalance()).toEqual(INITIAL_BALANCE + (addBalance * times));
+            
         });
     });
 });
