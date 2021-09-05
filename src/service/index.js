@@ -57,6 +57,12 @@ app.get('/mine/transactions', (req, res) => {
     }
 });
 
+app.post('/wallet', (req, res) => {
+    const { publicKey } = new Wallet(blockchain);
+    
+    res.json({ publicKey });
+});
+
 app.listen(HTTP_PORT, () => {
     console.log(`Service http:${HTTP_PORT} listening...`);
     p2pService.listen();
